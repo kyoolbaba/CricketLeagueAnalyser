@@ -37,14 +37,35 @@ public class CricketLeagueAnalyser {
     }
 
     public String getAverageWiseSortedData() throws CricketLeagueAnalyserException {
+        Comparator<IplRunSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.average);
+        return sort(iplCSVComparator);
+    }
+
+    public String getStrikeRateWiseSortedData() throws CricketLeagueAnalyserException {
+        Comparator<IplRunSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.strikeRate);
+        return sort(iplCSVComparator);
+    }
+
+    public String getSixesWiseSortedData() throws CricketLeagueAnalyserException {
+        Comparator<IplRunSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.sixes);
+        return sort(iplCSVComparator);
+    }
+
+    public String getFoursWiseSortedData() throws CricketLeagueAnalyserException {
+        Comparator<IplRunSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.fours);
+        return sort(iplCSVComparator);
+    }
+
+    public String sort(Comparator cricketLeagueCSV) throws CricketLeagueAnalyserException {
         if(runSheetMap==null || runSheetMap.size()==0){
             throw new CricketLeagueAnalyserException("No League Data",
                     CricketLeagueAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE);
         }
-        Comparator<IplRunSheetDAO> iplCSVComparator =Comparator.comparing(average->average.average);
-        List sortedDataByAverage=runSheetMap.values().stream().
-                sorted(iplCSVComparator).collect(Collectors.toList());
-        String sortedAverageDataInJson=new Gson().toJson(sortedDataByAverage);
-        return sortedAverageDataInJson;
+        List sortedDataByColumn= (List) runSheetMap.values().stream().
+                sorted(cricketLeagueCSV).collect(Collectors.toList());
+        String sortedDataInJson=new Gson().toJson(sortedDataByColumn);
+        return sortedDataInJson;
     }
+
+
 }
