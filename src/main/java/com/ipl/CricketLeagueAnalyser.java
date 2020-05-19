@@ -28,11 +28,14 @@ public class CricketLeagueAnalyser {
            return runSheetMap.size();
         }catch(IOException e){
             throw new CricketLeagueAnalyserException("problem with CSV file",
-                    CricketLeagueAnalyserException.ExceptionType.CSV_FILE_PROBLEM);
+                    CricketLeagueAnalyserException.ExceptionType.FILE_NOT_PRESENT);
 
         }catch(CSVBuilderException e){
             throw new CricketLeagueAnalyserException(e.getMessage(),
                     CricketLeagueAnalyserException.ExceptionType.NOT_ABLE_TO_PARSE);
+        }catch(RuntimeException e){
+            throw new CricketLeagueAnalyserException(e.getMessage(),
+                    CricketLeagueAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE);
         }
     }
 
@@ -68,4 +71,10 @@ public class CricketLeagueAnalyser {
     }
 
 
+    public String getStrikeRateWiseWithSixesAndFoursSortedData() throws CricketLeagueAnalyserException {
+        Comparator<IplRunSheetDAO> iplCSVCompareByStrikeRate =Comparator.comparing(sortBy->sortBy.strikeRate);
+        Comparator<IplRunSheetDAO> iplCSVCompareBySixes=iplCSVCompareByStrikeRate.thenComparing(sortBy->sortBy.sixes);
+        Comparator<IplRunSheetDAO> iplCSVCompareByFours=iplCSVCompareBySixes.thenComparing(sortBy->sortBy.fours);
+        return sort(iplCSVCompareByFours);
+    }
 }
