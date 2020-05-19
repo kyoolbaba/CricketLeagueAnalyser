@@ -4,6 +4,7 @@ import com.IndianCensus.CSVBuilderException;
 import com.IndianCensus.ICSVBuilder;
 import com.IndianCensus.CSVBuilderFactory;
 import com.google.gson.Gson;
+import com.sun.javafx.css.Combinator;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -72,9 +73,17 @@ public class CricketLeagueAnalyser {
 
 
     public String getStrikeRateWiseWithSixesAndFoursSortedData() throws CricketLeagueAnalyserException {
-        Comparator<IplRunSheetDAO> iplCSVCompareByStrikeRate =Comparator.comparing(sortBy->sortBy.strikeRate);
-        Comparator<IplRunSheetDAO> iplCSVCompareBySixes=iplCSVCompareByStrikeRate.thenComparing(sortBy->sortBy.sixes);
-        Comparator<IplRunSheetDAO> iplCSVCompareByFours=iplCSVCompareBySixes.thenComparing(sortBy->sortBy.fours);
-        return sort(iplCSVCompareByFours);
+        Comparator<IplRunSheetDAO> iplCSVCompareByFoursSixesAndStrikeRate =Comparator.comparing(sortBy->sortBy.combinationOfFoursSixesAndStriteRate);
+        return sort(iplCSVCompareByFoursSixesAndStrikeRate);
+    }
+
+    public String getSixesAndFoursWiseSortedData() throws CricketLeagueAnalyserException {
+        Comparator<IplRunSheetDAO> iplCSVCompareByFoursAndSixes =Comparator.comparing(sortBy->sortBy.combinationOfFoursAndSixes);
+        return sort(iplCSVCompareByFoursAndSixes);
+    }
+
+    public String getBestCombinationOfAverageAndStrikeRate() throws CricketLeagueAnalyserException {
+        Comparator<IplRunSheetDAO> iplCSVCompareByStrikeRateAndAverage =Comparator.comparing(sortBy->sortBy.combinationOfStrikeRateAndAverage);
+        return sort(iplCSVCompareByStrikeRateAndAverage);
     }
 }
