@@ -86,4 +86,9 @@ public class CricketLeagueAnalyser {
         Comparator<IplRunSheetDAO> iplCSVCompareByStrikeRateAndAverage =Comparator.comparing(sortBy->sortBy.combinationOfStrikeRateAndAverage);
         return sort(iplCSVCompareByStrikeRateAndAverage);
     }
+
+    public String getBestCombinationRunsAndAverage() throws CricketLeagueAnalyserException {
+        Comparator<IplRunSheetDAO> iplCSVCompareByRunsAndAverage =Comparator.comparing(sortBy->sortBy.combinationOfRunsWithAverage);
+        return sort(iplCSVCompareByRunsAndAverage);
+    }
 }

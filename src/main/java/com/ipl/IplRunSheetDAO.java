@@ -15,6 +15,7 @@ public class IplRunSheetDAO {
     public double combinationOfFoursAndSixes;
     public double combinationOfFoursSixesAndStriteRate;
     public double combinationOfStrikeRateAndAverage;
+    public double combinationOfRunsWithAverage;
 
     public IplRunSheetDAO(Ipl2019RunsSheetCSV iplRunsSheetCSV) {
         this.player = iplRunsSheetCSV.player;
@@ -31,6 +32,7 @@ public class IplRunSheetDAO {
         this.combinationOfFoursAndSixes=iplRunsSheetCSV.fours*iplRunsSheetCSV.sixes;
         this.combinationOfFoursSixesAndStriteRate=iplRunsSheetCSV.fours*iplRunsSheetCSV.sixes*iplRunsSheetCSV.strikeRate;
         this.combinationOfStrikeRateAndAverage=iplRunsSheetCSV.runs*iplRunsSheetCSV.strikeRate*iplRunsSheetCSV.average*iplRunsSheetCSV.notOut;
+        this.combinationOfRunsWithAverage= iplRunsSheetCSV.runs*iplRunsSheetCSV.average;
     }
     public IplRunSheetDAO(){}
 }
