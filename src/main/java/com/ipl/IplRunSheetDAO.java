@@ -16,6 +16,25 @@ public class IplRunSheetDAO {
     public double combinationOfFoursSixesAndStriteRate;
     public double combinationOfStrikeRateAndAverage;
     public double combinationOfRunsWithAverage;
+    public double overs;
+    public double wickets;
+    public double economy;
+    public int fiveWickets;
+    public int fourWickets;
+
+    public IplRunSheetDAO(Ipl2019WicketsSheetCSV iplWicketsSheetCSV) {
+        this.player = iplWicketsSheetCSV.player;
+        this.match = iplWicketsSheetCSV.match;
+        this.innings = iplWicketsSheetCSV.innings;
+        this.runs = iplWicketsSheetCSV.runs;
+        this.strikeRate = iplWicketsSheetCSV.strikeRate;
+        this.average = iplWicketsSheetCSV.average;
+        this.overs = iplWicketsSheetCSV.overs;
+        this.wickets = iplWicketsSheetCSV.wickets;
+        this.economy = iplWicketsSheetCSV.economy;
+        this.fiveWickets = iplWicketsSheetCSV.fiveWickets;
+        this.fourWickets = iplWicketsSheetCSV.fourWickets;
+    }
 
     public IplRunSheetDAO(Ipl2019RunsSheetCSV iplRunsSheetCSV) {
         this.player = iplRunsSheetCSV.player;
@@ -34,5 +53,7 @@ public class IplRunSheetDAO {
         this.combinationOfStrikeRateAndAverage=iplRunsSheetCSV.runs*iplRunsSheetCSV.strikeRate*iplRunsSheetCSV.average*iplRunsSheetCSV.notOut;
         this.combinationOfRunsWithAverage= iplRunsSheetCSV.runs*iplRunsSheetCSV.average;
     }
+
     public IplRunSheetDAO(){}
+
 }

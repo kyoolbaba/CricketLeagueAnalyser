@@ -7,10 +7,11 @@ public class CricketLeagueAnalyserTest {
     public static final String IPL_2019_FACT_SHEET_MOSTRUNS="C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\IPL2019FactsheetMostRuns.csv";
     public static final String INCOMPATIBLE_FILE_PATH="C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\SCode.csv";
     public static final String INVALID_FILE_PATH="abc.txt";
+    public static final String IPL_2019_FACT_SHEET_MOSTWICKETS="C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\IPL2019FactsheetMostWkts.csv";
 
     @Test
-    public void givenCSVFileShouldReturnCorrectRecord() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnCorrectRecord() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         int count=cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         Assert.assertEquals(100,count);
     }
@@ -18,7 +19,7 @@ public class CricketLeagueAnalyserTest {
     @Test
     public void givenWrongFilePathShouldReturnIOException() {
        try {
-           CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+           CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
            int count = cricketLeagueAnalyser.loadRunsSheetData(INVALID_FILE_PATH);
        }catch(CricketLeagueAnalyserException e){
            Assert.assertEquals(CricketLeagueAnalyserException.ExceptionType.FILE_NOT_PRESENT,e.type);
@@ -28,7 +29,7 @@ public class CricketLeagueAnalyserTest {
     @Test
     public void givenWrongCsvFileShouldThroughRunTimeException() throws CricketLeagueAnalyserException {
         try {
-            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
             cricketLeagueAnalyser.loadRunsSheetData(INCOMPATIBLE_FILE_PATH);
         }catch(CricketLeagueAnalyserException e){
             Assert.assertEquals(CricketLeagueAnalyserException.ExceptionType.DATA_NOT_APPROPRIATE,e.type);
@@ -36,8 +37,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnAverageOfRecords() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnAverageOfRecords() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedAverageData=cricketLeagueAnalyser.getAverageWiseSortedData();
         IplRunSheetDAO[] sortedData=new Gson().fromJson(sortedAverageData,IplRunSheetDAO[].class);
@@ -46,8 +47,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnMinAverageOfRecords() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnMinAverageOfRecords() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedAverageData=cricketLeagueAnalyser.getAverageWiseSortedData();
         IplRunSheetDAO[] sortedData=new Gson().fromJson(sortedAverageData,IplRunSheetDAO[].class);
@@ -55,8 +56,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnMaxStrikingRateInRecords() throws CricketLeagueAnalyserException {
-    CricketLeagueAnalyser cricketLeagueAnalyser= new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnMaxStrikingRateInRecords() throws CricketLeagueAnalyserException {
+    CricketLeagueAnalyser cricketLeagueAnalyser= new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
     cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
     String sortedStrikeRateData=cricketLeagueAnalyser.getStrikeRateWiseSortedData();
     IplRunSheetDAO[] sortedData=new Gson().fromJson(sortedStrikeRateData,IplRunSheetDAO[].class);
@@ -64,8 +65,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnMaximunSixesInRecords() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnMaximunSixesInRecords() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedStrikeRateData=cricketLeagueAnalyser.getSixesWiseSortedData();
         IplRunSheetDAO[] sortedData=new Gson().fromJson(sortedStrikeRateData,IplRunSheetDAO[].class);
@@ -73,8 +74,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnMinimunSixesInRecords() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnMinimunSixesInRecords() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedDataByFourAndSixes=cricketLeagueAnalyser.getSixesWiseSortedData();
         IplRunSheetDAO[] sortedData=new Gson().fromJson(sortedDataByFourAndSixes,IplRunSheetDAO[].class);
@@ -82,8 +83,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnPlayerOfBestCombinationsOfSixesAndFoursInRecord() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnPlayerOfBestCombinationsOfSixesAndFoursInRecord() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedDataBySixesAnfFours=cricketLeagueAnalyser.getSixesAndFoursWiseSortedData();
         IplRunSheetDAO[] sortedData=new Gson().fromJson(sortedDataBySixesAnfFours,IplRunSheetDAO[].class);
@@ -91,8 +92,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnMaximunFoursInRecords() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnMaximunFoursInRecords() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedData=cricketLeagueAnalyser.getFoursWiseSortedData();
         IplRunSheetDAO[] sortedStrikeRateData=new Gson().fromJson(sortedData,IplRunSheetDAO[].class);
@@ -100,8 +101,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnMinimunFoursInRecords() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnMinimunFoursInRecords() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedData=cricketLeagueAnalyser.getFoursWiseSortedData();
         IplRunSheetDAO[] sortedStrikeRateData=new Gson().fromJson(sortedData,IplRunSheetDAO[].class);
@@ -109,8 +110,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnPlayerOfBestCombinationsOfSixesFoursAndStrikeRate() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnPlayerOfBestCombinationsOfSixesFoursAndStrikeRate() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedData=cricketLeagueAnalyser.getStrikeRateWiseWithSixesAndFoursSortedData();
         IplRunSheetDAO[] sortedStrikeRateData=new Gson().fromJson(sortedData,IplRunSheetDAO[].class);
@@ -118,8 +119,8 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnPlayerOfBestCombinationOfAverageAndStrikeRate() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnPlayerOfBestCombinationOfAverageAndStrikeRate() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedData=cricketLeagueAnalyser.getBestCombinationOfAverageAndStrikeRate();
         IplRunSheetDAO[] sortedCombinationOfStrikeRateAndAverage=new Gson().fromJson(sortedData,IplRunSheetDAO[].class);
@@ -127,12 +128,19 @@ public class CricketLeagueAnalyserTest {
     }
 
     @Test
-    public void givenCSVFileShouldReturnPlayerOfBestCombinationOfMaxRunsWithAverages() throws CricketLeagueAnalyserException {
-        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser();
+    public void givenIpl2019RunsCSVFileShouldReturnPlayerOfBestCombinationOfMaxRunsWithAverages() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
         cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
         String sortedCombinationOfRunsAndAverage=cricketLeagueAnalyser.getBestCombinationRunsAndAverage();
         IplRunSheetDAO[] sortedData=new Gson().fromJson(sortedCombinationOfRunsAndAverage,IplRunSheetDAO[].class);
         Assert.assertEquals("David Warner ",sortedData[sortedData.length-1].player);
     }
 
+    @Test
+    public void givenIpl2019WicketsCSVFileShouldReturnCorrectRecord() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.WICKETSHEET);
+        int noOfRecords=cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTWICKETS);
+        Assert.assertEquals(99,noOfRecords);
+
+    }
 }
