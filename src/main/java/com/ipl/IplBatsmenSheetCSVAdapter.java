@@ -13,21 +13,37 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 
-public class IplRunsSheetCSVAdapter {
-    public <E> Map loadRunsSheetData(String csvFilePath,Class<E> csvClass) throws CricketLeagueAnalyserException {
+public class IplBatsmenSheetCSVAdapter extends CricketLeagueAdapter{
+
+
+    @Override
+    public <E> Map loadIplSheetData( Class<E> csvClass,String ... csvFilePath) throws CricketLeagueAnalyserException {
+        Map<String,IplSheetDAO> sheetMap= null;
+        if(csvFilePath.length>1){
+            sheetMap=super.loadIplCricketSheetData(csvFilePath[0], Ipl2019BatsmenSheetCSV.class);
+            return this.loadBowlersSheetData(csvFilePath[1],sheetMap);
+        }else{
+            return super.loadIplCricketSheetData(csvFilePath[0], Ipl2019BatsmenSheetCSV.class);
+        }
+
+    }
+
+
+    public <E> Map loadBowlersSheetData(String csvFilePath, Map<String,IplSheetDAO> mapSheet) throws CricketLeagueAnalyserException {
         {
             Map<String, IplSheetDAO> runSheetMap = new HashMap<String, IplSheetDAO>();
             try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
                 ICSVBuilder icsvBuilder = CSVBuilderFactory.createCSVBuilder();
-                Iterator<E> csvIterator = icsvBuilder.getCSVFileIterator(reader, csvClass);
-                Iterable<E> csvIterable = () -> csvIterator;
-                StreamSupport.stream(csvIterable.spliterator(), false)
-                        .map(Ipl2019RunsSheetCSV.class::cast)
-                        .forEach(iplRunsCSV -> runSheetMap.put(iplRunsCSV.player, new IplSheetDAO(iplRunsCSV)));
+                Iterator<Ipl2019BowlersSheetCSV> csvIterator = icsvBuilder.getCSVFileIterator(reader, Ipl2019BowlersSheetCSV.class);
+                Iterable<Ipl2019BowlersSheetCSV> csvIterable = () -> csvIterator;
+                StreamSupport.stream(csvIterable.spliterator(),false)
+                        .filter(iplBowlingSheet->mapSheet.get(iplBowlingSheet.player)!=null)
+                        .forEach(iplBowlingSheet->mapSheet.get(iplBowlingSheet.player).average=iplBowlingSheet.bowlingAverage);
                 return runSheetMap;
             } catch (IOException e) {
                 throw new CricketLeagueAnalyserException("problem with CSV file",
                         CricketLeagueAnalyserException.ExceptionType.FILE_NOT_PRESENT);
+
             } catch (CSVBuilderException e) {
                 throw new CricketLeagueAnalyserException(e.getMessage(),
                         CricketLeagueAnalyserException.ExceptionType.NOT_ABLE_TO_PARSE);
@@ -37,4 +53,5 @@ public class IplRunsSheetCSVAdapter {
             }
         }
     }
+
 }

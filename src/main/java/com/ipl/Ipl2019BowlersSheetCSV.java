@@ -2,7 +2,7 @@ package com.ipl;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class Ipl2019WicketsSheetCSV {
+public class Ipl2019BowlersSheetCSV {
 
     @CsvBindByName(column = "PLAYER", required = true)
     public String player;
@@ -23,7 +23,7 @@ public class Ipl2019WicketsSheetCSV {
     public double wickets;
 
     @CsvBindByName(column = "Avg")
-    public double average;
+    public double bowlingAverage;
 
     @CsvBindByName(column = "Econ")
     public double economy;
@@ -37,10 +37,10 @@ public class Ipl2019WicketsSheetCSV {
     @CsvBindByName(column = "4w")
     public int fourWickets;
 
-    public Ipl2019WicketsSheetCSV() {
+    public Ipl2019BowlersSheetCSV() {
     }
 
-    public Ipl2019WicketsSheetCSV(String player, int match,
+    public Ipl2019BowlersSheetCSV(String player, int match,
                                   int innings, double overs,
                                   int runs, double wickets,
                                   double average, double economy,
@@ -52,7 +52,7 @@ public class Ipl2019WicketsSheetCSV {
         this.overs = overs;
         this.runs = runs;
         this.wickets = wickets;
-        this.average = average;
+        this.bowlingAverage = average;
         this.economy = economy;
         this.strikeRate = strikeRate;
         this.fiveWickets = fiveWickets;
@@ -68,7 +68,7 @@ public class Ipl2019WicketsSheetCSV {
                 ", overs=" + overs +
                 ", runs=" + runs +
                 ", wickets=" + wickets +
-                ", average=" + average +
+                ", average=" + bowlingAverage +
                 ", economy=" + economy +
                 ", strikeRate=" + strikeRate +
                 ", fiveWickets=" + fiveWickets +

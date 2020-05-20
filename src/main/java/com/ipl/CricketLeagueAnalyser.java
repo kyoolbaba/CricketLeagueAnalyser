@@ -13,8 +13,8 @@ public class CricketLeagueAnalyser {
     public CricketLeagueAnalyser(IplSheet sheet){
         this.sheet=sheet;
     }
-    public  int loadRunsSheetData(String csvFilePath) throws CricketLeagueAnalyserException {
-        sheetMap=IplAdapterFactory.getCensusData(csvFilePath,sheet);
+    public  int loadRunsSheetData(String ... csvFilePath) throws CricketLeagueAnalyserException {
+        sheetMap=IplAdapterFactory.getCensusData(sheet,csvFilePath);
         return sheetMap.size();
     }
 
@@ -39,27 +39,32 @@ public class CricketLeagueAnalyser {
     }
 
     public String getStrikeRateWiseWithSixesAndFoursSortedData() throws CricketLeagueAnalyserException {
-        Comparator<IplSheetDAO> iplCSVCompareByFoursSixesAndStrikeRate =Comparator.comparing(sortBy->sortBy.combinationOfFoursSixesAndStriteRate);
+        Comparator<IplSheetDAO> iplCSVCompareByFoursSixesAndStrikeRate =
+                Comparator.comparing(sortBy->sortBy.combinationOfFoursSixesAndStriteRate);
         return sort(iplCSVCompareByFoursSixesAndStrikeRate);
     }
 
     public String getSixesAndFoursWiseSortedData() throws CricketLeagueAnalyserException {
-        Comparator<IplSheetDAO> iplCSVCompareByFoursAndSixes =Comparator.comparing(sortBy->sortBy.combinationOfFoursAndSixes);
+        Comparator<IplSheetDAO> iplCSVCompareByFoursAndSixes =
+                Comparator.comparing(sortBy->sortBy.combinationOfFoursAndSixes);
         return sort(iplCSVCompareByFoursAndSixes);
     }
 
     public String getBestCombinationOfAverageAndStrikeRate() throws CricketLeagueAnalyserException {
-        Comparator<IplSheetDAO> iplCSVCompareByStrikeRateAndAverage =Comparator.comparing(sortBy->sortBy.combinationOfStrikeRateAndAverage);
+        Comparator<IplSheetDAO> iplCSVCompareByStrikeRateAndAverage =
+                Comparator.comparing(sortBy->sortBy.combinationOfStrikeRateAndAverage);
         return sort(iplCSVCompareByStrikeRateAndAverage);
     }
 
     public String getBestCombinationRunsAndAverage() throws CricketLeagueAnalyserException {
-        Comparator<IplSheetDAO> iplCSVCompareByRunsAndAverage =Comparator.comparing(sortBy->sortBy.combinationOfRunsWithAverage);
+        Comparator<IplSheetDAO> iplCSVCompareByRunsAndAverage =
+                Comparator.comparing(sortBy->sortBy.combinationOfRunsWithAverage);
         return sort(iplCSVCompareByRunsAndAverage);
     }
 
     public String getBowlingAverage() throws CricketLeagueAnalyserException {
-        Comparator<IplSheetDAO> iplCSVCompareByBowlingAverage =Comparator.comparing(sortBy->sortBy.average);
+        Comparator<IplSheetDAO> iplCSVCompareByBowlingAverage =
+                Comparator.comparing(sortBy->sortBy.average);
         return sort(iplCSVCompareByBowlingAverage);
     }
 
@@ -69,14 +74,32 @@ public class CricketLeagueAnalyser {
     }
 
     public String getBestOfStrikeRateWith4And5Wickets() throws CricketLeagueAnalyserException {
-        Comparator<IplSheetDAO> iplCSVBestOfStrikeRateWith4And5Wickets=Comparator.comparing(sortBy->sortBy.combinationOfStrikeRateWith4And5Wickets);
+        Comparator<IplSheetDAO> iplCSVBestOfStrikeRateWith4And5Wickets=
+                Comparator.comparing(sortBy->sortBy.combinationOfStrikeRateWith4And5Wickets);
         return sort(iplCSVBestOfStrikeRateWith4And5Wickets);
     }
 
     public String getBestOfBowlingStrikeRateWithAverage() throws CricketLeagueAnalyserException {
-        Comparator<IplSheetDAO> iplCSVBestOfBolwingStrikeRateWithAverage=Comparator.comparing(sortBy->sortBy.combinationOfBowlingStrikeRateWithAverage);
+        Comparator<IplSheetDAO> iplCSVBestOfBolwingStrikeRateWithAverage=
+                Comparator.comparing(sortBy->sortBy.combinationOfBowlingStrikeRateWithAverage);
         return sort(iplCSVBestOfBolwingStrikeRateWithAverage);
     }
+
+
+    public String getMaxWicketsWithBestBowlingAverage() throws CricketLeagueAnalyserException {
+        Comparator<IplSheetDAO> iplCSVBestOfBolwingStrikeRateWithAverage=
+                Comparator.comparing(sortBy->sortBy.combinationOfMaxWicketsWithBowlingAverage);
+        return sort(iplCSVBestOfBolwingStrikeRateWithAverage);
+    }
+
+
+    public String getBestBowlingAndBattingAverage() throws CricketLeagueAnalyserException {
+        Comparator<IplSheetDAO> iplCSVBestOfBolwingStrikeRateWithAverage=
+                Comparator.comparing(sortBy->(sortBy.average*sortBy.runs*sortBy.bowlingAverage+sortBy.wickets));
+        return sort(iplCSVBestOfBolwingStrikeRateWithAverage);
+    }
+
+
 
     public String sort(Comparator cricketLeagueCSV) throws CricketLeagueAnalyserException {
         if(sheetMap ==null || sheetMap.size()==0){

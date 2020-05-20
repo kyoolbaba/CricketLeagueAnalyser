@@ -23,41 +23,45 @@ public class IplSheetDAO {
     public int fourWickets;
     public double combinationOfStrikeRateWith4And5Wickets;
     public double combinationOfBowlingStrikeRateWithAverage;
+    public double combinationOfMaxWicketsWithBowlingAverage;
+    public double bowlingAverage;
 
-    public IplSheetDAO(Ipl2019WicketsSheetCSV iplWicketsSheetCSV) {
-        this.player = iplWicketsSheetCSV.player;
-        this.match = iplWicketsSheetCSV.match;
-        this.innings = iplWicketsSheetCSV.innings;
-        this.runs = iplWicketsSheetCSV.runs;
-        this.strikeRate = iplWicketsSheetCSV.strikeRate;
-        this.average = iplWicketsSheetCSV.average;
-        this.overs = iplWicketsSheetCSV.overs;
-        this.wickets = iplWicketsSheetCSV.wickets;
-        this.economy = iplWicketsSheetCSV.economy;
-        this.fiveWickets = iplWicketsSheetCSV.fiveWickets;
-        this.fourWickets = iplWicketsSheetCSV.fourWickets;
-        this.combinationOfStrikeRateWith4And5Wickets=iplWicketsSheetCSV.overs*
-                (iplWicketsSheetCSV.wickets+iplWicketsSheetCSV.fourWickets+iplWicketsSheetCSV.fiveWickets);
-        this.combinationOfBowlingStrikeRateWithAverage=iplWicketsSheetCSV.overs*
-                iplWicketsSheetCSV.wickets*iplWicketsSheetCSV.average*iplWicketsSheetCSV.runs;
+    public IplSheetDAO(Ipl2019BowlersSheetCSV iplBolwerstCSV) {
+        this.player = iplBolwerstCSV.player;
+        this.match = iplBolwerstCSV.match;
+        this.innings = iplBolwerstCSV.innings;
+        this.runs = iplBolwerstCSV.runs;
+        this.strikeRate = iplBolwerstCSV.strikeRate;
+        this.average = iplBolwerstCSV.bowlingAverage;
+        this.overs = iplBolwerstCSV.overs;
+        this.wickets = iplBolwerstCSV.wickets;
+        this.economy = iplBolwerstCSV.economy;
+        this.fiveWickets = iplBolwerstCSV.fiveWickets;
+        this.fourWickets = iplBolwerstCSV.fourWickets;
+        this.combinationOfStrikeRateWith4And5Wickets= iplBolwerstCSV.overs*
+                (iplBolwerstCSV.wickets+ iplBolwerstCSV.fourWickets+ iplBolwerstCSV.fiveWickets);
+        this.combinationOfBowlingStrikeRateWithAverage= iplBolwerstCSV.overs*
+                iplBolwerstCSV.wickets* iplBolwerstCSV.bowlingAverage * iplBolwerstCSV.runs;
+        this.combinationOfMaxWicketsWithBowlingAverage= iplBolwerstCSV.wickets
+                * iplBolwerstCSV.overs* iplBolwerstCSV.bowlingAverage;
     }
 
-    public IplSheetDAO(Ipl2019RunsSheetCSV iplRunsSheetCSV) {
-        this.player = iplRunsSheetCSV.player;
-        this.match = iplRunsSheetCSV.match;
-        this.innings = iplRunsSheetCSV.innings;
-        this.notOut = iplRunsSheetCSV.notOut;
-        this.runs = iplRunsSheetCSV.runs;
-        this.strikeRate = iplRunsSheetCSV.strikeRate;
-        this.average = iplRunsSheetCSV.average;
-        this.hundreds = iplRunsSheetCSV.hundreds;
-        this.fiftys = iplRunsSheetCSV.fiftys;
-        this.sixes = iplRunsSheetCSV.sixes;
-        this.fours = iplRunsSheetCSV.fours;
-        this.combinationOfFoursAndSixes=iplRunsSheetCSV.fours*iplRunsSheetCSV.sixes;
-        this.combinationOfFoursSixesAndStriteRate=iplRunsSheetCSV.fours*iplRunsSheetCSV.sixes*iplRunsSheetCSV.strikeRate;
-        this.combinationOfStrikeRateAndAverage=iplRunsSheetCSV.runs*iplRunsSheetCSV.strikeRate*iplRunsSheetCSV.average*iplRunsSheetCSV.notOut;
-        this.combinationOfRunsWithAverage= iplRunsSheetCSV.runs*iplRunsSheetCSV.average;
+    public IplSheetDAO(Ipl2019BatsmenSheetCSV iplBatsmenSheetCSV) {
+        this.player = iplBatsmenSheetCSV.player;
+        this.match = iplBatsmenSheetCSV.match;
+        this.innings = iplBatsmenSheetCSV.innings;
+        this.notOut = iplBatsmenSheetCSV.notOut;
+        this.runs = iplBatsmenSheetCSV.runs;
+        this.strikeRate = iplBatsmenSheetCSV.strikeRate;
+        this.average = iplBatsmenSheetCSV.average;
+        this.hundreds = iplBatsmenSheetCSV.hundreds;
+        this.fiftys = iplBatsmenSheetCSV.fiftys;
+        this.sixes = iplBatsmenSheetCSV.sixes;
+        this.fours = iplBatsmenSheetCSV.fours;
+        this.combinationOfFoursAndSixes= iplBatsmenSheetCSV.fours* iplBatsmenSheetCSV.sixes;
+        this.combinationOfFoursSixesAndStriteRate= iplBatsmenSheetCSV.fours* iplBatsmenSheetCSV.sixes* iplBatsmenSheetCSV.strikeRate;
+        this.combinationOfStrikeRateAndAverage= iplBatsmenSheetCSV.runs* iplBatsmenSheetCSV.strikeRate* iplBatsmenSheetCSV.average* iplBatsmenSheetCSV.notOut;
+        this.combinationOfRunsWithAverage= iplBatsmenSheetCSV.runs* iplBatsmenSheetCSV.average;
     }
 
     public IplSheetDAO(){}
