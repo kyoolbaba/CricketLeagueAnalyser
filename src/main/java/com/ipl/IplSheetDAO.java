@@ -1,6 +1,6 @@
 package com.ipl;
 
-public class IplRunSheetDAO {
+public class IplSheetDAO {
     public String player;
     public int match;
     public int innings;
@@ -21,8 +21,10 @@ public class IplRunSheetDAO {
     public double economy;
     public int fiveWickets;
     public int fourWickets;
+    public double combinationOfStrikeRateWith4And5Wickets;
+    public double combinationOfBowlingStrikeRateWithAverage;
 
-    public IplRunSheetDAO(Ipl2019WicketsSheetCSV iplWicketsSheetCSV) {
+    public IplSheetDAO(Ipl2019WicketsSheetCSV iplWicketsSheetCSV) {
         this.player = iplWicketsSheetCSV.player;
         this.match = iplWicketsSheetCSV.match;
         this.innings = iplWicketsSheetCSV.innings;
@@ -34,9 +36,13 @@ public class IplRunSheetDAO {
         this.economy = iplWicketsSheetCSV.economy;
         this.fiveWickets = iplWicketsSheetCSV.fiveWickets;
         this.fourWickets = iplWicketsSheetCSV.fourWickets;
+        this.combinationOfStrikeRateWith4And5Wickets=iplWicketsSheetCSV.overs*
+                (iplWicketsSheetCSV.wickets+iplWicketsSheetCSV.fourWickets+iplWicketsSheetCSV.fiveWickets);
+        this.combinationOfBowlingStrikeRateWithAverage=iplWicketsSheetCSV.overs*
+                iplWicketsSheetCSV.wickets*iplWicketsSheetCSV.average*iplWicketsSheetCSV.runs;
     }
 
-    public IplRunSheetDAO(Ipl2019RunsSheetCSV iplRunsSheetCSV) {
+    public IplSheetDAO(Ipl2019RunsSheetCSV iplRunsSheetCSV) {
         this.player = iplRunsSheetCSV.player;
         this.match = iplRunsSheetCSV.match;
         this.innings = iplRunsSheetCSV.innings;
@@ -54,6 +60,6 @@ public class IplRunSheetDAO {
         this.combinationOfRunsWithAverage= iplRunsSheetCSV.runs*iplRunsSheetCSV.average;
     }
 
-    public IplRunSheetDAO(){}
+    public IplSheetDAO(){}
 
 }

@@ -36,6 +36,26 @@ public class Ipl2019RunsSheetCSV {
     @CsvBindByName(column ="4s" , required=true)
     public int fours;
 
+    public Ipl2019RunsSheetCSV() {
+    }
+
+    public Ipl2019RunsSheetCSV(String player, int match,
+                               int innings, int notOut,
+                               int runs, double strikeRate,
+                               double average, int hundreds,
+                               int fiftys, int sixes, int fours) {
+        this.player = player;
+        this.match = match;
+        this.innings = innings;
+        this.notOut = notOut;
+        this.runs = runs;
+        this.strikeRate = strikeRate;
+        this.average = average;
+        this.hundreds = hundreds;
+        this.fiftys = fiftys;
+        this.sixes = sixes;
+        this.fours = fours;
+    }
 
     @Override
     public String toString() {

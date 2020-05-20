@@ -16,14 +16,14 @@ import java.util.stream.StreamSupport;
 public class IplRunsSheetCSVAdapter {
     public <E> Map loadRunsSheetData(String csvFilePath,Class<E> csvClass) throws CricketLeagueAnalyserException {
         {
-            Map<String, IplRunSheetDAO> runSheetMap = new HashMap<String, IplRunSheetDAO>();
+            Map<String, IplSheetDAO> runSheetMap = new HashMap<String, IplSheetDAO>();
             try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
                 ICSVBuilder icsvBuilder = CSVBuilderFactory.createCSVBuilder();
                 Iterator<E> csvIterator = icsvBuilder.getCSVFileIterator(reader, csvClass);
                 Iterable<E> csvIterable = () -> csvIterator;
                 StreamSupport.stream(csvIterable.spliterator(), false)
                         .map(Ipl2019RunsSheetCSV.class::cast)
-                        .forEach(iplRunsCSV -> runSheetMap.put(iplRunsCSV.player, new IplRunSheetDAO(iplRunsCSV)));
+                        .forEach(iplRunsCSV -> runSheetMap.put(iplRunsCSV.player, new IplSheetDAO(iplRunsCSV)));
                 return runSheetMap;
             } catch (IOException e) {
                 throw new CricketLeagueAnalyserException("problem with CSV file",

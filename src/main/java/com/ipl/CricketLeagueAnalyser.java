@@ -6,9 +6,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CricketLeagueAnalyser {
+
     public enum IplSheet{RUNSHEET,WICKETSHEET}
     private IplSheet sheet;
-    Map<String, IplRunSheetDAO> sheetMap =null;
+    Map<String, IplSheetDAO> sheetMap =null;
     public CricketLeagueAnalyser(IplSheet sheet){
         this.sheet=sheet;
     }
@@ -18,43 +19,63 @@ public class CricketLeagueAnalyser {
     }
 
     public String getAverageWiseSortedData() throws CricketLeagueAnalyserException {
-        Comparator<IplRunSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.average);
+        Comparator<IplSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.average);
         return sort(iplCSVComparator);
     }
 
     public String getStrikeRateWiseSortedData() throws CricketLeagueAnalyserException {
-        Comparator<IplRunSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.strikeRate);
+        Comparator<IplSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.strikeRate);
         return sort(iplCSVComparator);
     }
 
     public String getSixesWiseSortedData() throws CricketLeagueAnalyserException {
-        Comparator<IplRunSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.sixes);
+        Comparator<IplSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.sixes);
         return sort(iplCSVComparator);
     }
 
     public String getFoursWiseSortedData() throws CricketLeagueAnalyserException {
-        Comparator<IplRunSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.fours);
+        Comparator<IplSheetDAO> iplCSVComparator =Comparator.comparing(sortBy->sortBy.fours);
         return sort(iplCSVComparator);
     }
 
     public String getStrikeRateWiseWithSixesAndFoursSortedData() throws CricketLeagueAnalyserException {
-        Comparator<IplRunSheetDAO> iplCSVCompareByFoursSixesAndStrikeRate =Comparator.comparing(sortBy->sortBy.combinationOfFoursSixesAndStriteRate);
+        Comparator<IplSheetDAO> iplCSVCompareByFoursSixesAndStrikeRate =Comparator.comparing(sortBy->sortBy.combinationOfFoursSixesAndStriteRate);
         return sort(iplCSVCompareByFoursSixesAndStrikeRate);
     }
 
     public String getSixesAndFoursWiseSortedData() throws CricketLeagueAnalyserException {
-        Comparator<IplRunSheetDAO> iplCSVCompareByFoursAndSixes =Comparator.comparing(sortBy->sortBy.combinationOfFoursAndSixes);
+        Comparator<IplSheetDAO> iplCSVCompareByFoursAndSixes =Comparator.comparing(sortBy->sortBy.combinationOfFoursAndSixes);
         return sort(iplCSVCompareByFoursAndSixes);
     }
 
     public String getBestCombinationOfAverageAndStrikeRate() throws CricketLeagueAnalyserException {
-        Comparator<IplRunSheetDAO> iplCSVCompareByStrikeRateAndAverage =Comparator.comparing(sortBy->sortBy.combinationOfStrikeRateAndAverage);
+        Comparator<IplSheetDAO> iplCSVCompareByStrikeRateAndAverage =Comparator.comparing(sortBy->sortBy.combinationOfStrikeRateAndAverage);
         return sort(iplCSVCompareByStrikeRateAndAverage);
     }
 
     public String getBestCombinationRunsAndAverage() throws CricketLeagueAnalyserException {
-        Comparator<IplRunSheetDAO> iplCSVCompareByRunsAndAverage =Comparator.comparing(sortBy->sortBy.combinationOfRunsWithAverage);
+        Comparator<IplSheetDAO> iplCSVCompareByRunsAndAverage =Comparator.comparing(sortBy->sortBy.combinationOfRunsWithAverage);
         return sort(iplCSVCompareByRunsAndAverage);
+    }
+
+    public String getBowlingAverage() throws CricketLeagueAnalyserException {
+        Comparator<IplSheetDAO> iplCSVCompareByBowlingAverage =Comparator.comparing(sortBy->sortBy.average);
+        return sort(iplCSVCompareByBowlingAverage);
+    }
+
+    public String getEconomyWiseSortedData() throws CricketLeagueAnalyserException {
+        Comparator<IplSheetDAO> iplCSVCompareByEconomy =Comparator.comparing(sortBy->sortBy.economy);
+        return sort(iplCSVCompareByEconomy);
+    }
+
+    public String getBestOfStrikeRateWith4And5Wickets() throws CricketLeagueAnalyserException {
+        Comparator<IplSheetDAO> iplCSVBestOfStrikeRateWith4And5Wickets=Comparator.comparing(sortBy->sortBy.combinationOfStrikeRateWith4And5Wickets);
+        return sort(iplCSVBestOfStrikeRateWith4And5Wickets);
+    }
+
+    public String getBestOfBowlingStrikeRateWithAverage() throws CricketLeagueAnalyserException {
+        Comparator<IplSheetDAO> iplCSVBestOfBolwingStrikeRateWithAverage=Comparator.comparing(sortBy->sortBy.combinationOfBowlingStrikeRateWithAverage);
+        return sort(iplCSVBestOfBolwingStrikeRateWithAverage);
     }
 
     public String sort(Comparator cricketLeagueCSV) throws CricketLeagueAnalyserException {
@@ -67,4 +88,6 @@ public class CricketLeagueAnalyser {
         String sortedDataInJson=new Gson().toJson(sortedDataByColumn);
         return sortedDataInJson;
     }
+
+
 }
