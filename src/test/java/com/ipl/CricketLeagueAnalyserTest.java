@@ -237,4 +237,14 @@ public class CricketLeagueAnalyserTest {
         IplSheetDAO[] sortedData=new Gson().fromJson(sortedDataBestBowlingAndBattingAverage, IplSheetDAO[].class);
         Assert.assertEquals("Shreyas Iyer",sortedData[sortedData.length-1].player);
     }
+
+    @Test
+    public void givenIpl2019BowlersAndBatsmenCSVFile_ShouldReturnPlayersWIthMaxmunRunsAndWicket() throws CricketLeagueAnalyserException {
+        CricketLeagueAnalyser cricketLeagueAnalyser=
+                new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.WICKETSHEET);
+        cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS,IPL_2019_FACT_SHEET_MOSTWICKETS);
+        String sortedDataBestRunsAndWickets=cricketLeagueAnalyser.getBestRunsAndWickets();
+        IplSheetDAO[] sortedData=new Gson().fromJson(sortedDataBestRunsAndWickets, IplSheetDAO[].class);
+        Assert.assertEquals("Shreyas Iyer",sortedData[sortedData.length-1].player);
+    }
 }

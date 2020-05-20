@@ -100,6 +100,13 @@ public class CricketLeagueAnalyser {
     }
 
 
+    public String getBestRunsAndWickets() throws CricketLeagueAnalyserException {
+        Comparator<IplSheetDAO> iplCSVBestOfBolwingStrikeRateWithAverage=
+                Comparator.comparing(sortBy->(sortBy.runs*sortBy.wickets));
+        return sort(iplCSVBestOfBolwingStrikeRateWithAverage);
+    }
+
+
 
     public String sort(Comparator cricketLeagueCSV) throws CricketLeagueAnalyserException {
         if(sheetMap ==null || sheetMap.size()==0){
