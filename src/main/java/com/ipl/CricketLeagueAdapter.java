@@ -13,11 +13,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 
-public abstract class CricketLeagueAdapter {
+public interface CricketLeagueAdapter {
 
     public abstract <E> Map loadIplSheetData( Class<E> csvClass,String ... csvFilePath) throws CricketLeagueAnalyserException;
 
-    public <E> Map loadIplCricketSheetData(String csvFilePath, Class<E> csvClass) throws CricketLeagueAnalyserException {
+    default <E> Map loadIplCricketSheetData(String csvFilePath, Class<E> csvClass) throws CricketLeagueAnalyserException {
         {
             Map<String, IplSheetDAO> runSheetMap = new HashMap<String, IplSheetDAO>();
             try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {

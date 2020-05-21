@@ -13,17 +13,17 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 
-public class IplBatsmenSheetCSVAdapter extends CricketLeagueAdapter{
+public class IplBatsmenSheetCSVAdapter implements CricketLeagueAdapter{
 
 
     @Override
     public <E> Map loadIplSheetData( Class<E> csvClass,String ... csvFilePath) throws CricketLeagueAnalyserException {
         Map<String,IplSheetDAO> sheetMap= null;
         if(csvFilePath.length>1){
-            sheetMap=super.loadIplCricketSheetData(csvFilePath[0], Ipl2019BatsmenSheetCSV.class);
+            sheetMap= CricketLeagueAdapter.super.loadIplCricketSheetData(csvFilePath[0], Ipl2019BatsmenSheetCSV.class);
             return this.loadBowlersSheetData(csvFilePath[1],sheetMap);
         }else{
-            return super.loadIplCricketSheetData(csvFilePath[0], Ipl2019BatsmenSheetCSV.class);
+            return CricketLeagueAdapter.super.loadIplCricketSheetData(csvFilePath[0], Ipl2019BatsmenSheetCSV.class);
         }
 
     }
