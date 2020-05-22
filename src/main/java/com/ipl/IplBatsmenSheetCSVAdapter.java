@@ -38,10 +38,8 @@ public class IplBatsmenSheetCSVAdapter implements CricketLeagueAdapter{
                 Iterable<Ipl2019BowlersSheetCSV> csvIterable = () -> csvIterator;
                 StreamSupport.stream(csvIterable.spliterator(),false)
                         .filter(iplBowlingSheet->mapSheet.get(iplBowlingSheet.player)!=null)
-                        .forEach(iplBowlingSheet->mapSheet.get(iplBowlingSheet.player).average=iplBowlingSheet.bowlingAverage);
-                StreamSupport.stream(csvIterable.spliterator(),false)
-                        .filter(iplBowlingSheet->mapSheet.get(iplBowlingSheet.player)!=null)
-                        .forEach(iplBowlingSheet->mapSheet.get(iplBowlingSheet.player).wickets=iplBowlingSheet.wickets);
+                        .forEach(iplBowlingSheet->{mapSheet.get(iplBowlingSheet.player).average=iplBowlingSheet.bowlingAverage;
+                            mapSheet.get(iplBowlingSheet.player).wickets=iplBowlingSheet.wickets;});
                 return runSheetMap;
             } catch (IOException e) {
                 throw new CricketLeagueAnalyserException("problem with CSV file",

@@ -24,6 +24,9 @@ public class Ipl2019BatsmenSheetCSV {
     @CsvBindByName(column ="Avg" )
     public double average;
 
+    @CsvBindByName(column = "Wkts")
+    public int wickets;
+
     @CsvBindByName(column ="100" )
     public int hundreds;
 

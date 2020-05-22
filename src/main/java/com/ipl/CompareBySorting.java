@@ -3,7 +3,7 @@ package com.ipl;
 import java.util.Comparator;
 import java.util.EnumMap;
 
-public class CompareByComparator {
+public class CompareBySorting {
 
 static EnumMap<CricketLeagueAnalyser.CompareBy, Comparator<IplSheetDAO>> enumMap
         =new EnumMap(CricketLeagueAnalyser.CompareBy.class);
