@@ -13,7 +13,7 @@ public class CricketLeagueAnalyser {
     public CricketLeagueAnalyser(IplSheet sheet){
         this.sheet=sheet;
     }
-    
+
     public  int loadRunsSheetData(String ... csvFilePath) throws CricketLeagueAnalyserException {
         sheetMap=IplAdapterFactory.getIPLData(sheet,csvFilePath);
         return sheetMap.size();

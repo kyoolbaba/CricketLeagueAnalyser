@@ -44,6 +44,7 @@ public class IplSheetDAO {
                 iplBolwerstCSV.wickets* iplBolwerstCSV.bowlingAverage * iplBolwerstCSV.runs;
         this.combinationOfMaxWicketsWithBowlingAverage= iplBolwerstCSV.wickets
                 * iplBolwerstCSV.overs* iplBolwerstCSV.bowlingAverage;
+
     }
 
     public IplSheetDAO(Ipl2019BatsmenSheetCSV iplBatsmenSheetCSV) {
