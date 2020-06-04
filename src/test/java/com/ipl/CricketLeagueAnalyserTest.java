@@ -2,7 +2,11 @@ package com.ipl;
 
 import com.google.gson.Gson;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class CricketLeagueAnalyserTest {
 
@@ -10,6 +14,7 @@ public class CricketLeagueAnalyserTest {
     public static final String INCOMPATIBLE_FILE_PATH="C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\SCode.csv";
     public static final String INVALID_FILE_PATH="abc.txt";
     public static final String IPL_2019_FACT_SHEET_MOSTWICKETS="C:\\Users\\KYOOLBABAA\\Desktop\\New folder\\IPL2019FactsheetMostWkts.csv";
+
 
     @Test
     public void givenIplRunsCSVFile_ShouldReturnCorrectRecord()  {
@@ -52,7 +57,7 @@ public class CricketLeagueAnalyserTest {
                 new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
             cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
             String sortedAverageData=cricketLeagueAnalyser.compareBy(CricketLeagueAnalyser.CompareBy.COMPARE_BY_AVERAGE);
-            Ipl2019BatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedAverageData, Ipl2019BatsmenSheetCSV[].class);
+            IplBatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedAverageData, IplBatsmenSheetCSV[].class);
             Assert.assertEquals("MS Dhoni",sortedData[sortedData.length-1].player);
             Assert.assertEquals("Ishant Sharma",sortedData[0].player);
         }catch(CricketLeagueAnalyserException e){
@@ -67,7 +72,7 @@ public class CricketLeagueAnalyserTest {
                 new CricketLeagueAnalyser(CricketLeagueAnalyser.IplSheet.RUNSHEET);
             cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
             String sortedAverageData=cricketLeagueAnalyser.compareBy(CricketLeagueAnalyser.CompareBy.COMPARE_BY_AVERAGE);
-            Ipl2019BatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedAverageData, Ipl2019BatsmenSheetCSV[].class);
+            IplBatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedAverageData, IplBatsmenSheetCSV[].class);
             Assert.assertEquals("Ishant Sharma",sortedData[0].player);
         }catch(CricketLeagueAnalyserException e){
             e.printStackTrace();
@@ -82,7 +87,7 @@ public class CricketLeagueAnalyserTest {
              cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
             String sortedStrikeRateData=
                     cricketLeagueAnalyser.compareBy(CricketLeagueAnalyser.CompareBy.COMPARE_BY_STRIKERATE);
-            Ipl2019BatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedStrikeRateData, Ipl2019BatsmenSheetCSV[].class);
+            IplBatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedStrikeRateData, IplBatsmenSheetCSV[].class);
         Assert.assertEquals("Ishant Sharma",sortedData[sortedData.length-1].player);
         }catch(CricketLeagueAnalyserException e){
             e.printStackTrace();
@@ -97,7 +102,7 @@ public class CricketLeagueAnalyserTest {
             cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
             String sortedDataBySixesAnfFours=
                     cricketLeagueAnalyser.compareBy(CricketLeagueAnalyser.CompareBy.COMBINAITON_OF_4AND6);
-            Ipl2019BatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedDataBySixesAnfFours, Ipl2019BatsmenSheetCSV[].class);
+            IplBatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedDataBySixesAnfFours, IplBatsmenSheetCSV[].class);
             Assert.assertEquals("Andre Russell",sortedData[sortedData.length-1].player);
         }catch(CricketLeagueAnalyserException e){
             e.printStackTrace();
@@ -112,7 +117,7 @@ public class CricketLeagueAnalyserTest {
             cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
             String sortedStrikeRateData=
                     cricketLeagueAnalyser.compareBy(CricketLeagueAnalyser.CompareBy.COMBINATION_OF_STRIKERATE_AND6AND4);
-            Ipl2019BatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedStrikeRateData, Ipl2019BatsmenSheetCSV[].class);
+            IplBatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedStrikeRateData, IplBatsmenSheetCSV[].class);
             Assert.assertEquals("Andre Russell",sortedData[sortedData.length-1].player);
             Assert.assertEquals("Kuldeep Yadav",sortedData[0].player);
         }catch(CricketLeagueAnalyserException e){
@@ -128,7 +133,7 @@ public class CricketLeagueAnalyserTest {
             cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
             String sortedCombinationOfStrikeRateAndAverage=
                     cricketLeagueAnalyser.compareBy(CricketLeagueAnalyser.CompareBy.COMBINATION_OF_STRIKERATE_WITH_AVERAGE);
-            Ipl2019BatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedCombinationOfStrikeRateAndAverage, Ipl2019BatsmenSheetCSV[].class);
+            IplBatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedCombinationOfStrikeRateAndAverage, IplBatsmenSheetCSV[].class);
             Assert.assertEquals("MS Dhoni",sortedData[sortedData.length-1].player);
             Assert.assertEquals("Shimron Hetmyer",sortedData[0].player);
         }catch(CricketLeagueAnalyserException e){
@@ -144,7 +149,7 @@ public class CricketLeagueAnalyserTest {
             cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTRUNS);
             String sortedCombinationOfRunsAndAverage=
                     cricketLeagueAnalyser.compareBy(CricketLeagueAnalyser.CompareBy.COMBINATION_OF_RUNS_WITH_BEST_AVERAGES);
-            Ipl2019BatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedCombinationOfRunsAndAverage, Ipl2019BatsmenSheetCSV[].class);
+            IplBatsmenSheetCSV[] sortedData=new Gson().fromJson(sortedCombinationOfRunsAndAverage, IplBatsmenSheetCSV[].class);
             Assert.assertEquals("David Warner ",sortedData[sortedData.length-1].player);
             Assert.assertEquals("Ishant Sharma",sortedData[0].player);
         }catch(CricketLeagueAnalyserException e){
@@ -172,7 +177,7 @@ public class CricketLeagueAnalyserTest {
             cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTWICKETS);
             String sortedDataByBowlingAverage=
                     cricketLeagueAnalyser.compareBy(CricketLeagueAnalyser.CompareBy.COMPARE_BY_BOWLINGAVERAGE);
-            Ipl2019BowlersSheetCSV[] sortedData=new Gson().fromJson(sortedDataByBowlingAverage, Ipl2019BowlersSheetCSV[].class);
+            IplBowlersSheetCSV[] sortedData=new Gson().fromJson(sortedDataByBowlingAverage, IplBowlersSheetCSV[].class);
             Assert.assertEquals("Krishnappa Gowtham",sortedData[sortedData.length-1].player);
             Assert.assertEquals("Suresh Raina",sortedData[0].player);
         }catch(CricketLeagueAnalyserException e){
@@ -188,7 +193,7 @@ public class CricketLeagueAnalyserTest {
             cricketLeagueAnalyser.loadRunsSheetData(IPL_2019_FACT_SHEET_MOSTWICKETS);
             String sortedDataByStrikeRate=
                     cricketLeagueAnalyser.compareBy(CricketLeagueAnalyser.CompareBy.COMPARE_BY_BOWLINGSTRIKERATE);
-            Ipl2019BowlersSheetCSV[] sortedData=new Gson().fromJson(sortedDataByStrikeRate, Ipl2019BowlersSheetCSV[].class);
+            IplBowlersSheetCSV[] sortedData=new Gson().fromJson(sortedDataByStrikeRate, IplBowlersSheetCSV[].class);
             Assert.assertEquals("Krishnappa Gowtham",sortedData[sortedData.length-1].player);
             Assert.assertEquals("Suresh Raina",sortedData[0].player);
         }catch(CricketLeagueAnalyserException e){

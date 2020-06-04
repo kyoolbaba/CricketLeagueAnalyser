@@ -2,16 +2,10 @@ package com.ipl;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class Ipl2019BowlersSheetCSV {
+public class IplBowlersSheetCSV {
 
     @CsvBindByName(column = "PLAYER", required = true)
     public String player;
-
-    @CsvBindByName(column = "Mat")
-    public int match;
-
-    @CsvBindByName(column = "Inns")
-    public int innings;
 
     @CsvBindByName(column = "Ov")
     public double overs;
@@ -20,7 +14,7 @@ public class Ipl2019BowlersSheetCSV {
     public int runs;
 
     @CsvBindByName(column = "Wkts")
-    public double wickets;
+    public int wickets;
 
     @CsvBindByName(column = "Avg")
     public double bowlingAverage;
@@ -37,18 +31,16 @@ public class Ipl2019BowlersSheetCSV {
     @CsvBindByName(column = "4w")
     public int fourWickets;
 
-    public Ipl2019BowlersSheetCSV() {
+    public IplBowlersSheetCSV() {
     }
 
-    public Ipl2019BowlersSheetCSV(String player, int match,
-                                  int innings, double overs,
-                                  int runs, double wickets,
-                                  double average, double economy,
-                                  double strikeRate, int fiveWickets,
-                                  int fourWickets) {
+    public IplBowlersSheetCSV(String player,
+                              double overs,
+                              int runs, int wickets,
+                              double average, double economy,
+                              double strikeRate, int fiveWickets,
+                              int fourWickets) {
         this.player = player;
-        this.match = match;
-        this.innings = innings;
         this.overs = overs;
         this.runs = runs;
         this.wickets = wickets;
@@ -63,8 +55,6 @@ public class Ipl2019BowlersSheetCSV {
     public String toString() {
         return "Ipl2019WicketsSheetCSV{" +
                 "player='" + player + '\'' +
-                ", match=" + match +
-                ", innings=" + innings +
                 ", overs=" + overs +
                 ", runs=" + runs +
                 ", wickets=" + wickets +

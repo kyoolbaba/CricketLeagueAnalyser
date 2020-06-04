@@ -13,17 +13,16 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.StreamSupport;
 
-public class IplBatsmenSheetCSVAdapter implements CricketLeagueAdapter{
-
+public class IplBatsmenSheetAdapter implements CricketLeagueAdapter{
 
     @Override
     public <E> Map loadIplSheetData( Class<E> csvClass,String ... csvFilePath) throws CricketLeagueAnalyserException {
         Map<String,IplSheetDAO> sheetMap= null;
         if(csvFilePath.length>1){
-            sheetMap= CricketLeagueAdapter.super.loadIplCricketSheetData(csvFilePath[0], Ipl2019BatsmenSheetCSV.class);
+            sheetMap= CricketLeagueAdapter.super.loadIplCricketSheetData(csvFilePath[0], IplBatsmenSheetCSV.class);
             return this.loadBowlersSheetData(csvFilePath[1],sheetMap);
         }else{
-            return CricketLeagueAdapter.super.loadIplCricketSheetData(csvFilePath[0], Ipl2019BatsmenSheetCSV.class);
+            return CricketLeagueAdapter.super.loadIplCricketSheetData(csvFilePath[0], IplBatsmenSheetCSV.class);
         }
 
     }
@@ -34,11 +33,11 @@ public class IplBatsmenSheetCSVAdapter implements CricketLeagueAdapter{
             Map<String, IplSheetDAO> runSheetMap = new HashMap<String, IplSheetDAO>();
             try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
                 ICSVBuilder icsvBuilder = CSVBuilderFactory.createCSVBuilder();
-                Iterator<Ipl2019BowlersSheetCSV> csvIterator = icsvBuilder.getCSVFileIterator(reader, Ipl2019BowlersSheetCSV.class);
-                Iterable<Ipl2019BowlersSheetCSV> csvIterable = () -> csvIterator;
+                Iterator<IplBowlersSheetCSV> csvIterator = icsvBuilder.getCSVFileIterator(reader, IplBowlersSheetCSV.class);
+                Iterable<IplBowlersSheetCSV> csvIterable = () -> csvIterator;
                 StreamSupport.stream(csvIterable.spliterator(),false)
                         .filter(iplBowlingSheet->mapSheet.get(iplBowlingSheet.player)!=null)
-                        .forEach(iplBowlingSheet->{mapSheet.get(iplBowlingSheet.player).average=iplBowlingSheet.bowlingAverage;
+                        .forEach(iplBowlingSheet->{mapSheet.get(iplBowlingSheet.player).bowlingAverage =iplBowlingSheet.bowlingAverage;
                             mapSheet.get(iplBowlingSheet.player).wickets=iplBowlingSheet.wickets;});
                 return runSheetMap;
             } catch (IOException e) {

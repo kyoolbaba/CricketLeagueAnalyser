@@ -8,10 +8,9 @@ public class CompareBySorting {
 static EnumMap<CricketLeagueAnalyser.CompareBy, Comparator<IplSheetDAO>> enumMap
         =new EnumMap(CricketLeagueAnalyser.CompareBy.class);
 
-
-public  static Comparator<IplSheetDAO> getComparatorforSorting(CricketLeagueAnalyser.CompareBy compareOptions){
+public  static Comparator<IplSheetDAO> getComparatorforSorting(CricketLeagueAnalyser.CompareBy comparingBy){
     enumMap.put(CricketLeagueAnalyser.CompareBy.COMPARE_BY_AVERAGE,
-            Comparator.comparing(sortBy->sortBy.average));
+            Comparator.comparing(sortBy->sortBy.batsmenAverage));
     enumMap.put(CricketLeagueAnalyser.CompareBy.COMPARE_BY_STRIKERATE,
             Comparator.comparing(sortBy->sortBy.strikeRate));
     enumMap.put(CricketLeagueAnalyser.CompareBy.COMBINATION_OF_STRIKERATE_AND6AND4,
@@ -38,7 +37,7 @@ public  static Comparator<IplSheetDAO> getComparatorforSorting(CricketLeagueAnal
             Comparator.comparing(sortBy->sortBy.bestBowlingAndBattingAverages));
     enumMap.put(CricketLeagueAnalyser.CompareBy.ALLROUNDERS,
             Comparator.comparing(sortBy->sortBy.bestWicketsAndRuns));
-    return   enumMap.get(compareOptions);
+    return   enumMap.get(comparingBy);
 }
 
 }

@@ -26,11 +26,11 @@ public interface CricketLeagueAdapter {
                 Iterable<E> csvIterable = () -> csvIterator;
                 if (csvClass.getName().equals("com.ipl.Ipl2019BatsmenSheetCSV")) {
                     StreamSupport.stream(csvIterable.spliterator(), false)
-                            .map(Ipl2019BatsmenSheetCSV.class::cast)
+                            .map(IplBatsmenSheetCSV.class::cast)
                             .forEach(iplRunsCSV -> runSheetMap.put(iplRunsCSV.player, new IplSheetDAO(iplRunsCSV)));
                 }else if(csvClass.getName().equals("com.ipl.Ipl2019BowlersSheetCSV")){
                     StreamSupport.stream(csvIterable.spliterator(), false)
-                            .map(Ipl2019BowlersSheetCSV.class::cast)
+                            .map(IplBowlersSheetCSV.class::cast)
                             .forEach(iplRunsCSV -> runSheetMap.put(iplRunsCSV.player, new IplSheetDAO(iplRunsCSV)));
                 }
                 return runSheetMap;
